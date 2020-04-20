@@ -45,7 +45,7 @@ export default {
   data: () => ({
     username: "",
     password: "",
-    baseUrl: "http://localhost:3625/",
+    baseUrl: localStorage.getItem("baseURL") || "http://localhost:3625/",
     error: null,
     loading: false
   }),
@@ -56,7 +56,7 @@ export default {
         localStorage.setItem("baseURL", this.baseUrl);
         this.$http.defaults.baseURL = this.baseUrl;
         this.$http
-          .post("/auth/signin", {
+          .post("auth/signin", {
             Username: this.username,
             Password: this.password
           })
@@ -68,7 +68,6 @@ export default {
           })
           .catch(err => {
             this.error = err.response;
-            console.log(this.error);
             if (!err.status && !err.response) {
               // Network Error
               this.error = {

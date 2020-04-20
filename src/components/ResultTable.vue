@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import PasswordFiled from "./PasswordField";
+import PasswordField from "./PasswordField";
 
 export default {
   components: {
-    "password-field": PasswordFiled
+    "password-field": PasswordField
   },
   props: {
     tableData: Array

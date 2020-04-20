@@ -35,7 +35,7 @@ export default {
     refresh: function() {
       this.loading = true;
       this.$http
-        .get("http://localhost:3625/logins/")
+        .get("logins/")
         .then(res => {
           console.log(res);
           this.tableData = res.data;

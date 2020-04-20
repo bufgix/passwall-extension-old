@@ -3,17 +3,19 @@ import Router from "./router";
 
 const checkAuth = () => {
   const exToken = localStorage.getItem("token");
+  Vue.prototype.$http.defaults.baseURL =
+    localStorage.getItem("baseURL") || "http://localhost:3625/";
   if (exToken) {
     Vue.prototype.$http.defaults.headers.common.Authorization = `Bearer ${exToken}`;
     Vue.prototype.$http
-      .post("/auth/check")
+      .post("auth/check")
       .then(() => {
         Router.PageRouter.push({ path: "/" });
       })
       .catch(() => {
         // Try Refresh
         Vue.prototype.$http
-          .post("/auth/refresh")
+          .post("auth/refresh")
           .then(({ data }) => {
             localStorage.setItem("token", data.token);
             Vue.prototype.$http.defaults.headers.common.Authorization = `Bearer ${data.token}`;
@@ -37,6 +39,5 @@ const safeRedirect = (routeName) => {
   }
   return Promise.reject(false);
 };
-
 
 export { checkAuth, safeRedirect };
