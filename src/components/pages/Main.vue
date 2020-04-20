@@ -14,6 +14,13 @@ export default {
   components: {
     SearchBar,
     ResultTable
+  },
+  created: function() {
+    this.$http.get("http://localhost:3625/logins/")
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
   }
 };
 </script>
