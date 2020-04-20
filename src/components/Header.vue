@@ -10,17 +10,19 @@
         <strong>Wall</strong>
       </p>
 
-      <div class="uk-margin-small-left">
+      <div class="uk-margin-small-left" v-if="showBtn">
         <a @click="refresh" style="margin-top: 28px" uk-icon="icon: refresh"></a>
       </div>
     </div>
     <div>
       <button
+        v-if="showBtn"
         class="uk-button uk-button-small uk-button-primary"
         @click="newAction"
       >{{ actionText }}</button>
 
       <button
+        v-if="showBtn"
         class="uk-button uk-button-small uk-button-default uk-margin-small-left"
         uk-icon="icon: more"
       ></button>
@@ -30,12 +32,16 @@
 
 <script>
 /* eslint-disable no-constant-condition */
+import { safeRedirect } from "../utils";
+
 export default {
+  props: {
+    showBtn: Boolean
+  },
   data() {
     return {
       publicPath: process.env.BASE_URL,
-      actionText: "New",
-      currentPath: this.$router.currentRoute.path
+      actionText: "New"
     };
   },
   methods: {
@@ -44,15 +50,15 @@ export default {
       console.log("refreshing..");
     },
     newAction: function() {
-      if (this.currentPath === "/") {
-        this.$router.push("new");
-        this.currentPath = "/new";
-        this.actionText = "Back";
-      } else if (this.currentPath === "/new") {
-        console.log(this.currentPath);
-        this.$router.go(-1);
-        this.currentPath = "/";
-        this.actionText = "New";
+      const currentPath = this.$router.currentRoute.path;
+      if (currentPath === "/") {
+        safeRedirect("new").then(() => {
+          this.actionText = "Back";
+        });
+      } else if (currentPath === "/new") {
+        safeRedirect("/").then(() => {
+          this.actionText = "New";
+        });
       }
     }
   }
