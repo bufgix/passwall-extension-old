@@ -17,6 +17,7 @@
 /* eslint-disable no-undef */
 import SearchBar from "../SearchBar";
 import ResultTable from "../ResultTable";
+import { checkAuth } from "../../utils";
 
 export default {
   components: {
@@ -42,12 +43,14 @@ export default {
             this.loading = false;
           }, 1000);
         })
-        .catch(err => console.log(err));
+        .catch(() => {
+          // TODO: Show Error Message
+          checkAuth();
+        });
     }
   }
 };
 </script>
 
 <style>
-
 </style>
