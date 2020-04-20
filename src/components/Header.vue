@@ -9,10 +9,6 @@
         <span>Pass</span>
         <strong>Wall</strong>
       </p>
-
-      <div class="uk-margin-small-left" v-if="showBtn">
-        <a @click="refresh" style="margin-top: 28px" uk-icon="icon: refresh"></a>
-      </div>
     </div>
     <div>
       <button
@@ -45,10 +41,6 @@ export default {
     };
   },
   methods: {
-    refresh: function() {
-      // TODO: implemantiton
-      console.log("refreshing..");
-    },
     newAction: function() {
       const currentPath = this.$router.currentRoute.path;
       if (currentPath === "/") {

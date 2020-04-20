@@ -9,80 +9,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
-        </tr>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
-        </tr>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
-        </tr>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
-        </tr>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
-        </tr>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
-        </tr>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
-        </tr>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
-        </tr>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
-        </tr>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
-        </tr>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
-        </tr>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
-        </tr>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
-        </tr>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
-        </tr>
-        <tr>
-          <td>Table Data</td>
-          <td>Table Data</td>
-          <td>Table Data</td>
+        <tr v-for="row in tableData" :key="row.ID">
+          <td>{{row.URL}}</td>
+          <td>{{row.Username}}</td>
+          <td>{{row.Password}}</td>
         </tr>
       </tbody>
     </table>
@@ -90,13 +20,17 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    tableData: Array
+  }
+};
 </script>
 
 <style lang="scss" scoped>
 #table {
   max-height: 270px;
-  scrollbar-color: #B9B7C2 #f6f8fa;
+  scrollbar-color: #b9b7c2 #f6f8fa;
   scrollbar-width: thin;
 }
 
