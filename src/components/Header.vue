@@ -2,9 +2,7 @@
 <template>
   <div class="uk-flex uk-flex-between uk-flex-middle uk-text-center uk-text-middle">
     <div class="uk-flex uk-flex-left">
-      <router-link to="/">
-        <img :src="`${publicPath}logo.png`" alt="logo" height="76" width="76" />
-      </router-link>
+      <img :src="`${publicPath}logo.png`" alt="logo" height="76" width="76" />
       <p class="uk-text-lead">
         <span>Pass</span>
         <strong>Wall</strong>
@@ -19,9 +17,9 @@
 
       <button
         v-if="showBtn"
-        class="uk-button uk-button-small uk-button-default uk-margin-small-left"
-        uk-icon="icon: more"
-      ></button>
+        class="uk-button uk-button-small uk-button-danger uk-margin-small-left"
+        @click="quit()"
+      >Quit</button>
     </div>
   </div>
 </template>
@@ -52,6 +50,10 @@ export default {
           this.actionText = "New";
         });
       }
+    },
+    quit: function() {
+      localStorage.removeItem("token");
+      this.$router.push("login");
     }
   }
 };
