@@ -6,7 +6,7 @@
         <a @click="refresh" uk-icon="icon: refresh"></a>
       </div>
     </div>
-    <div v-if="loading">
+    <div v-if="loading" style=" min-height: 150px;">
       <span uk-spinner="ratio: 3" class="uk-margin-top"></span>
     </div>
     <ResultTable v-else :table-data="tableData" class="uk-margin-top"></ResultTable>
@@ -49,4 +49,5 @@ export default {
 </script>
 
 <style>
+
 </style>
