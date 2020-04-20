@@ -30,7 +30,10 @@
             <input v-model="password" class="uk-input" type="password" placeholder="Password" />
           </div>
         </div>
-        <button class="uk-button uk-button-default uk-align-right" @click="login()">LOG IN</button>
+        <button class="uk-button uk-button-default uk-align-right" @click="login()">
+          <div v-if="loading" uk-spinner></div>
+          <div v-else>LOG IN</div>
+        </button>
       </fieldset>
     </form>
   </div>
@@ -43,25 +46,40 @@ export default {
     username: "",
     password: "",
     baseUrl: "http://localhost:3625/",
-    error: null
+    error: null,
+    loading: false
   }),
   methods: {
     login: function() {
-      localStorage.setItem("baseURL", this.baseUrl);
-      this.$http.defaults.baseURL = this.baseUrl;
-      this.$http
-        .post("/auth/signin", {
-          Username: this.username,
-          Password: this.password
-        })
-        .then(({ data }) => {
-          localStorage.setItem("token", data.token);
-          this.$http.defaults.headers.common.Authorization = `Bearer ${data.token}`;
-          this.$router.push({ path: "/" });
-        })
-        .catch(err => {
-          this.error = err.response;
-        });
+      if (!this.loading) {
+        this.loading = true;
+        localStorage.setItem("baseURL", this.baseUrl);
+        this.$http.defaults.baseURL = this.baseUrl;
+        this.$http
+          .post("/auth/signin", {
+            Username: this.username,
+            Password: this.password
+          })
+          .then(({ data }) => {
+            localStorage.setItem("token", data.token);
+            this.$http.defaults.headers.common.Authorization = `Bearer ${data.token}`;
+            this.$router.push({ path: "/" });
+            this.loading = false;
+          })
+          .catch(err => {
+            this.error = err.response;
+            console.log(this.error);
+            if (!err.status && !err.response) {
+              // Network Error
+              this.error = {
+                data: {
+                  message: "PassWall server not reachable"
+                }
+              };
+            }
+            this.loading = false;
+          });
+      }
     }
   }
 };
