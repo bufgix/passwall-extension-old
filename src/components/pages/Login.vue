@@ -2,44 +2,35 @@
   <div>
     <form>
       <fieldset class="uk-fieldset">
-        <legend class="uk-legend">Legend</legend>
-
-        <div class="uk-margin">
-          <input class="uk-input" type="text" placeholder="Input" />
+        <legend class="uk-legend">Login</legend>
+        <div v-if="error" class="uk-alert-danger" uk-alert>
+          <a class="uk-alert-close" uk-close @click="error = null"></a>
+          <p class="uk-text-uppercase">{{error.data.message || 'Authentication failed'}}</p>
         </div>
 
-        <div class="uk-margin">
-          <select class="uk-select">
-            <option>Option 01</option>
-            <option>Option 02</option>
-          </select>
+        <div class="uk-margin uk-text-left">
+          <label class="uk-form-label">WallPass Server</label>
+          <div class="uk-inline uk-width-1-1">
+            <span class="uk-form-icon" uk-icon="icon: world"></span>
+            <input v-model="baseUrl" class="uk-input" type="text" placeholder="Server URL" />
+          </div>
         </div>
 
-        <div class="uk-margin">
-          <textarea class="uk-textarea" rows="5" placeholder="Textarea"></textarea>
+        <div class="uk-margin uk-text-left">
+          <label class="uk-form-label">Username</label>
+          <div class="uk-inline uk-width-1-1">
+            <span class="uk-form-icon" uk-icon="icon: user"></span>
+            <input v-model="username" class="uk-input" type="text" placeholder="Username" />
+          </div>
         </div>
-
-        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-          <label>
-            <input class="uk-radio" type="radio" name="radio2" checked /> A
-          </label>
-          <label>
-            <input class="uk-radio" type="radio" name="radio2" /> B
-          </label>
+        <div class="uk-margin uk-text-left">
+          <label class="uk-form-label">Password</label>
+          <div class="uk-inline uk-width-1-1">
+            <span class="uk-form-icon" uk-icon="icon: lock"></span>
+            <input v-model="password" class="uk-input" type="password" placeholder="Password" />
+          </div>
         </div>
-
-        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-          <label>
-            <input class="uk-checkbox" type="checkbox" checked /> A
-          </label>
-          <label>
-            <input class="uk-checkbox" type="checkbox" /> B
-          </label>
-        </div>
-
-        <div class="uk-margin">
-          <input class="uk-range" type="range" value="2" min="0" max="10" step="0.1" />
-        </div>
+        <button class="uk-button uk-button-default uk-align-right" @click="login()">Submit</button>
       </fieldset>
     </form>
   </div>
@@ -48,22 +39,29 @@
 <script>
 /* eslint-disable no-unused-vars */
 export default {
-  created: function() {
-    this.login();
-  },
+  data: () => ({
+    username: "",
+    password: "",
+    baseUrl: "http://localhost:3625/",
+    error: null
+  }),
   methods: {
     login: function() {
+      localStorage.setItem("baseURL", this.baseUrl);
+      this.$http.defaults.baseURL = this.baseUrl;
       this.$http
         .post("/auth/signin", {
-          Username: "passwall",
-          Password: "test123"
+          Username: this.username,
+          Password: this.password
         })
         .then(({ data }) => {
           localStorage.setItem("token", data.token);
           this.$http.defaults.headers.common.Authorization = `Bearer ${data.token}`;
           this.$router.push({ path: "/" });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          this.error = err.response;
+        });
     }
   }
 };
