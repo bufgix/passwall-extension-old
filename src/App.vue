@@ -26,6 +26,7 @@ body {
   text-align: center;
   color: #2c3e50;
   margin-top: 10px;
+  margin-bottom: 10px;
   width: 600px;
 }
 </style>
