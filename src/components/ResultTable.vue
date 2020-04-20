@@ -10,9 +10,11 @@
       </thead>
       <tbody>
         <tr v-for="row in tableData" :key="row.ID">
-          <td>{{row.URL}}</td>
-          <td>{{row.Username}}</td>
-          <td>{{row.Password}}</td>
+          <td class="uk-text-middle">{{row.URL}}</td>
+          <td class="uk-text-middle">{{row.Username}}</td>
+          <td class="uk-text-middle">
+            <password-field :value="row.Password"></password-field>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -20,7 +22,12 @@
 </template>
 
 <script>
+import PasswordFiled from "./PasswordField";
+
 export default {
+  components: {
+    "password-field": PasswordFiled
+  },
   props: {
     tableData: Array
   }
