@@ -1,5 +1,8 @@
 # passwall-browser-extension
 
+![passwall3](https://user-images.githubusercontent.com/22038798/79805312-81782f80-836e-11ea-9d5c-475177fb0beb.gif)
+
+
 ## Project setup
 ```
 yarn install
