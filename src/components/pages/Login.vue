@@ -30,7 +30,7 @@
             <input v-model="password" class="uk-input" type="password" placeholder="Password" />
           </div>
         </div>
-        <button class="uk-button uk-button-default uk-align-right" @click="login()">Submit</button>
+        <button class="uk-button uk-button-default uk-align-right" @click="login()">LOG IN</button>
       </fieldset>
     </form>
   </div>
