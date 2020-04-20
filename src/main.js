@@ -13,10 +13,8 @@ Vue.config.productionTip = false;
 Vue.prototype.$http = ApiService;
 
 
-(() => {
-  checkAuth();
-  new Vue({
-    router: Router.PageRouter,
-    render: (h) => h(App),
-  }).$mount("#app");
-})();
+checkAuth();
+new Vue({
+  router: Router.PageRouter,
+  render: (h) => h(App),
+}).$mount("#app");
