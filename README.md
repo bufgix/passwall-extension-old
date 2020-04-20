@@ -26,6 +26,7 @@ yarn lint
 ### Tarayıcıda test etmek (Firefox)
 Önce projeyi `yarn build` ile build edin. Daha sonra Firefox'da `about:debugging`'e sayfasına gidip geçici eklenti buttonuna tıklayıp build klasöründeki `manifest.json`'u seçin.
 
+![resim](https://user-images.githubusercontent.com/22038798/79805204-4aa21980-836e-11ea-8f5f-da6361561bd2.png)
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
