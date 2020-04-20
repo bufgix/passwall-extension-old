@@ -1,4 +1,4 @@
-# passwall-firefox
+# passwall-browser-extension
 
 ## Project setup
 ```
@@ -19,6 +19,10 @@ yarn build
 ```
 yarn lint
 ```
+
+### Tarayıcıda test etmek (Firefox)
+Önce projeyi `yarn build` ile build edin. Daha sonra Firefox'da `about:debugging`'e sayfasına gidip geçici eklenti buttonuna tıklayıp build klasöründeki `manifest.json`'u seçin.
+
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
