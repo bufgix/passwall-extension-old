@@ -1,6 +1,6 @@
 <template>
   <div class="uk-flex uk-flex-between">
-    <input class="uk-input uk-form-blank uk-form-width-small" :type="type" :value="value" />
+    <input class="uk-input uk-form-blank uk-form-width-small" :type="type" :value="value" readonly/>
     <button
       v-if="isPassword"
       class="uk-icon-button"
