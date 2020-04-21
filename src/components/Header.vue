@@ -38,17 +38,18 @@ export default {
       actionText: "New"
     };
   },
+  watch: {
+    $route(to, from) {
+      this.actionText = from.path === "/" ? "Back" : "New";
+    }
+  },
   methods: {
     newAction: function() {
       const currentPath = this.$router.currentRoute.path;
       if (currentPath === "/") {
-        safeRedirect("new").then(() => {
-          this.actionText = "Back";
-        });
+        safeRedirect("new");
       } else if (currentPath === "/new") {
-        safeRedirect("/").then(() => {
-          this.actionText = "New";
-        });
+        safeRedirect("/");
       }
     },
     quit: function() {
