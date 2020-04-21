@@ -1,35 +1,34 @@
 <template>
-  <div class="uk-flex uk-flex-between">
-    <input class="uk-input uk-form-blank uk-form-width-small" :type="type" :value="value" readonly/>
+  <div class="uk-flex uk-flex-around" @mouseup="keyup()" style="min-height: 36px;">
+    <div v-if="statePassword" class="uk-margin-small" style="margin-top: 8px;">{{ value }}</div>
     <button
-      v-if="isPassword"
+      v-if="!statePassword"
       class="uk-icon-button"
       :uk-icon="lockBtnIcon"
-      @click="showPassword()"
+      @mousedown="keydown()"
+      @mouseup="keyup()"
     ></button>
-    <button class="uk-icon-button" :uk-icon="copyBtnIcon" @click="copyPassword()"></button>
+    <button
+      v-if="!statePassword"
+      class="uk-icon-button"
+      :uk-icon="copyBtnIcon"
+      @click="copyPassword()"
+    ></button>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    value: String,
-    isPassword: {
-      type: Boolean,
-      default: true
-    }
+    value: String
   },
   data: () => ({
     type: "password",
     lockBtnIcon: "lock",
-    copyBtnIcon: "copy"
+    copyBtnIcon: "copy",
+    statePassword: false
   }),
   methods: {
-    showPassword: function() {
-      this.type = this.type === "password" ? "text" : "password";
-      this.lockBtnIcon = this.type === "password" ? "lock" : "unlock";
-    },
     copyPassword: function() {
       this.$copyText(this.value)
         .then(() => {
@@ -42,6 +41,12 @@ export default {
           this.copyBtnIcon = "close";
           console.log(err);
         });
+    },
+    keydown: function() {
+      this.statePassword = true;
+    },
+    keyup: function() {
+      this.statePassword = false;
     }
   }
 };

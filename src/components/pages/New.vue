@@ -50,7 +50,7 @@ export default {
     URL: "",
     username: "",
     password: "",
-    generatePassword: false,
+    generatePassword: true,
     loading: false,
     error: null
   }),
