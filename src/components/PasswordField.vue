@@ -1,5 +1,5 @@
 <template>
-  <div class="uk-flex uk-flex-around" @mouseup="keyup()" style="min-height: 36px;">
+  <div class="uk-flex uk-flex-around uk-flex-left" @mouseup="keyup()" style="min-height: 36px;">
     <div v-if="statePassword" class="uk-margin-small" style="margin-top: 8px;">{{ value }}</div>
     <button
       v-if="!statePassword"
