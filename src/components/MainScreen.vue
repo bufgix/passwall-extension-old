@@ -1,6 +1,6 @@
 <template>
   <div class="uk-container">
-    <Header :showBtn="checkLocalToken()"></Header>
+    <Header :showBtn="checkLocalToken()" class="uk-margin-small-bottom"></Header>
     <router-view></router-view>
   </div>
 </template>
