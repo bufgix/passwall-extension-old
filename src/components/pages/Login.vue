@@ -2,13 +2,12 @@
   <div>
     <form>
       <fieldset class="uk-fieldset">
-        <legend class="uk-legend">Login</legend>
         <div v-if="error" class="uk-alert-danger" uk-alert>
           <a class="uk-alert-close" uk-close @click="error = null"></a>
           <p class="uk-text-uppercase">{{error.data.message || 'Authentication failed'}}</p>
         </div>
 
-        <div class="uk-margin uk-text-left">
+        <div class="uk-margin-small uk-text-left">
           <label class="uk-form-label">WallPass Server</label>
           <div class="uk-inline uk-width-1-1">
             <span class="uk-form-icon" uk-icon="icon: world"></span>
@@ -16,21 +15,21 @@
           </div>
         </div>
 
-        <div class="uk-margin uk-text-left">
+        <div class="uk-margin-small uk-text-left">
           <label class="uk-form-label">Username</label>
           <div class="uk-inline uk-width-1-1">
             <span class="uk-form-icon" uk-icon="icon: user"></span>
             <input v-model="username" class="uk-input" type="text" placeholder="Username" />
           </div>
         </div>
-        <div class="uk-margin uk-text-left">
+        <div class="uk-margin-small uk-text-left">
           <label class="uk-form-label">Password</label>
           <div class="uk-inline uk-width-1-1">
             <span class="uk-form-icon" uk-icon="icon: lock"></span>
             <input v-model="password" class="uk-input" type="password" placeholder="Password" />
           </div>
         </div>
-        <button class="uk-button uk-button-default uk-align-right" @click="login()">
+        <button class="uk-button uk-button-default uk-align-right uk-margin-small-bottom" @click="login()">
           <div v-if="loading" uk-spinner></div>
           <div v-else>LOG IN</div>
         </button>

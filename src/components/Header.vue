@@ -1,14 +1,40 @@
 
 <template>
-  <div class="uk-flex uk-flex-between uk-flex-middle uk-text-center uk-text-middle">
+  <!--   <div class="uk-flex uk-flex-between uk-flex-middle uk-text-center uk-text-middle">
     <div class="uk-flex uk-flex-left">
-      <img :src="`${publicPath}logo.png`" alt="logo" height="76" width="76" />
-      <p class="uk-text-lead">
+      <img :src="`${publicPath}logo.png`" alt="logo" height="50" width="50" />
+      <h3>
         <span>Pass</span>
         <strong>Wall</strong>
-      </p>
+      </h3>
     </div>
     <div>
+      <button
+        v-if="showBtn"
+        class="uk-button uk-button-small uk-button-primary"
+        @click="newAction"
+      >{{ actionText }}</button>
+
+      <button
+        v-if="showBtn"
+        class="uk-button uk-button-small uk-button-danger uk-margin-small-left"
+        @click="quit()"
+      >Quit</button>
+    </div>
+  </div>-->
+  <div class="uk-grid-small" uk-grid>
+    <div class="uk-width-1-2 uk-flex">
+      <div style="margin-top: 5px">
+        <img :src="`${publicPath}logo.png`" alt="logo" height="40" width="40" />
+      </div>
+      <div>
+        <h4 style="margin-top: 9px">
+          <span>Pass</span>
+          <strong>Wall</strong>
+        </h4>
+      </div>
+    </div>
+    <div class="uk-width-1-2 uk-text-right uk-margin-small-top">
       <button
         v-if="showBtn"
         class="uk-button uk-button-small uk-button-primary"
