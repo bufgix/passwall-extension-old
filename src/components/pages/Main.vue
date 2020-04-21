@@ -38,9 +38,7 @@ export default {
         .get("logins/")
         .then(res => {
           this.tableData = res.data;
-          setTimeout(() => {
-            this.loading = false;
-          }, 1000);
+          this.loading = false;
         })
         .catch(() => {
           // TODO: Show Error Message
