@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="uk-flex uk-flex-between uk-grid-small" uk-grid>
-      <SearchBar class="uk-margin-small-top uk-width-expand"></SearchBar>
-      <div style="margin-top: 15px">
+      <SearchBar class="uk-width-expand"></SearchBar>
+      <div style="margin-top: 6px">
         <a @click="refresh" uk-icon="icon: refresh"></a>
       </div>
     </div>
@@ -37,7 +37,6 @@ export default {
       this.$http
         .get("logins/")
         .then(res => {
-          console.log(res);
           this.tableData = res.data;
           setTimeout(() => {
             this.loading = false;
