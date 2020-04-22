@@ -1,14 +1,45 @@
 <template>
   <div uk-grid>
-    <form class="uk-search uk-search-default uk-width-expand">
-      <span class="uk-search-icon-flip" uk-search-icon></span>
-      <input class="uk-search-input" type="search" placeholder="Search URL or Username" />
+    <form
+      class="uk-search uk-search-default uk-width-expand"
+      @submit.prevent="$emit('change', $event.target.elements[0].value)"
+    >
+      <span
+        class="uk-form-icon uk-form-icon-flip"
+        :uk-icon="stateVal === '' ? 'icon: search' : 'icon: close'"
+        @click="stateVal = ''"
+        style="pointer-events: all; cursor: pointer;"
+      ></span>
+      <input
+        class="uk-search-input"
+        type="search"
+        placeholder="Search URL or Username"
+        v-model="stateVal"
+      />
     </form>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    value: {
+      type: String,
+      default: ""
+    }
+  },
+  data: () => ({
+    stateVal: ""
+  }),
+  created: function() {
+    this.stateVal = this.value;
+  },
+  watch: {
+    value: function(){
+      this.stateVal = this.value;
+    }
+  }
+};
 </script>
 
 <style scoped>
