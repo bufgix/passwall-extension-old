@@ -1,13 +1,13 @@
 <template>
   <div
-    class="uk-flex uk-flex-around uk-flex-left"
+    class="uk-flex uk-flex-left"
     @mouseup="hidePassword()"
     style="min-height: 36px;"
   >
     <div v-if="statePassword" class="uk-margin-small" style="margin-top: 8px;">{{ value }}</div>
     <button
       v-if="!statePassword"
-      class="uk-icon-button"
+      class="uk-icon-button uk-margin-small-right"
       :uk-icon="lockBtnIcon"
       @mousedown="showPassword()"
       @mouseup="hidePassword()"
