@@ -6,5 +6,16 @@
     "default_title": "Passwall",
     "default_popup": "./index.html",
     "default_icon": "./logo.png"
+  },
+  "permissions": [
+    "webRequest",
+    "<all_urls>",
+    "activeTab",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "./bgscript.js"
+    ]
   }
 }

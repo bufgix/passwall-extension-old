@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && cp ./manifest.json dist/manifest.json",
+    "build": "vue-cli-service build && cp ./manifest.json dist/manifest.json && cp ./bgscript.js dist/bgscript.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
