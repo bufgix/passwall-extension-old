@@ -1,12 +1,16 @@
 <template>
-  <div class="uk-flex uk-flex-around uk-flex-left" @mouseup="keyup()" style="min-height: 36px;">
+  <div
+    class="uk-flex uk-flex-around uk-flex-left"
+    @mouseup="hidePassword()"
+    style="min-height: 36px;"
+  >
     <div v-if="statePassword" class="uk-margin-small" style="margin-top: 8px;">{{ value }}</div>
     <button
       v-if="!statePassword"
       class="uk-icon-button"
       :uk-icon="lockBtnIcon"
-      @mousedown="keydown()"
-      @mouseup="keyup()"
+      @mousedown="showPassword()"
+      @mouseup="hidePassword()"
     ></button>
     <button
       v-if="!statePassword"
@@ -42,10 +46,10 @@ export default {
           console.log(err);
         });
     },
-    keydown: function() {
+    showPassword: function() {
       this.statePassword = true;
     },
-    keyup: function() {
+    hidePassword: function() {
       this.statePassword = false;
     }
   }
