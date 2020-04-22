@@ -43,8 +43,13 @@ export default {
     safeBrowserAccess(getActiveTab)
       .then(({ url }) => {
         this.searchText = parseDomain(url);
-        console.log(this.searchText);
-        this.search();
+        this.search().then(result => {
+          if (!(result.length > 0)) {
+            // if no login for active tab, get all logins
+            this.searchText = "";
+            this.refresh();
+          }
+        });
       })
       .catch(err => {
         console.log(err);
@@ -70,11 +75,12 @@ export default {
     },
     search: function() {
       this.loading = true;
-      this.$http
+      return this.$http
         .get("logins/", { params: { Search: this.searchText } })
         .then(res => {
           this.tableData = res.data;
           this.loading = false;
+          return res.data;
         })
         .catch(err => {
           console.log(err);
