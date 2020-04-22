@@ -6,7 +6,6 @@
 </template>
 
 <script>
-/* eslint-disable no-undef */
 import Header from "./Header";
 export default {
   components: {

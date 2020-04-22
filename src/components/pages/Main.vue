@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="uk-flex uk-flex-between uk-grid-small" uk-grid>
-      <SearchBar class="uk-width-expand"></SearchBar>
+      <SearchBar
+        ref="search"
+        class="uk-width-expand"
+        :value="searchText"
+        v-on:change="changeSearchText"
+      ></SearchBar>
       <div style="margin-top: 6px">
         <a @click="refresh" uk-icon="icon: refresh"></a>
       </div>
@@ -17,7 +22,12 @@
 /* eslint-disable no-undef */
 import SearchBar from "../SearchBar";
 import ResultTable from "../ResultTable";
-import { checkAuth } from "../../utils";
+import {
+  checkAuth,
+  getActiveTab,
+  safeBrowserAccess,
+  parseDomain
+} from "../../utils";
 
 export default {
   components: {
@@ -26,10 +36,19 @@ export default {
   },
   data: () => ({
     loading: true,
-    tableData: []
+    tableData: [],
+    searchText: ""
   }),
   created: function() {
-    this.refresh();
+    safeBrowserAccess(getActiveTab)
+      .then(({ url }) => {
+        this.searchText = parseDomain(url);
+        console.log(this.searchText);
+        this.search();
+      })
+      .catch(err => {
+        console.log(err);
+      });
   },
   methods: {
     refresh: function() {
@@ -43,6 +62,23 @@ export default {
         .catch(() => {
           // TODO: Show Error Message
           checkAuth();
+        });
+    },
+    changeSearchText: function(e) {
+      this.searchText = e;
+      this.search();
+    },
+    search: function() {
+      this.loading = true;
+      this.$http
+        .get("logins/", { params: { Search: this.searchText } })
+        .then(res => {
+          this.tableData = res.data;
+          this.loading = false;
+        })
+        .catch(err => {
+          console.log(err);
+          this.loading = false;
         });
     }
   }

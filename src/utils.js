@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-undef */
 import Vue from "vue";
 import Router from "./router";
 
@@ -40,4 +42,28 @@ const safeRedirect = (routeName) => {
   return Promise.reject(false);
 };
 
-export { checkAuth, safeRedirect };
+const getActiveTab = () => {
+  // use as first parameter of safeBrowserAccess function
+  browser = browser || null;
+  return browser.tabs
+    .query({ currentWindow: true, active: true })
+    .then((tabs) => tabs[0], console.error);
+};
+
+const safeBrowserAccess = (func, args = null) => {
+  // This function for testing in browser and as extension
+  // In browser, it will raise exception not error (syntax, undefined, etc...)
+  try {
+    browser = browser || null;
+    return func.apply(this, args);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+};
+
+const parseDomain = (url) => {
+  var matches = url.match(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n\?\=]+)/im);
+  return matches && matches[1];
+};
+
+export { checkAuth, safeRedirect, getActiveTab, safeBrowserAccess, parseDomain };
