@@ -3,6 +3,8 @@
 import Vue from "vue";
 import Router from "./router";
 
+const EXCLUDED_DOMAINS = ["about"];
+
 const checkAuth = () => {
   const exToken = localStorage.getItem("token");
   Vue.prototype.$http.defaults.baseURL =
@@ -55,6 +57,7 @@ const safeBrowserAccess = (func, args = null) => {
   // In browser, it will raise exception not error (syntax, undefined, etc...)
   try {
     browser = browser || null;
+
     return func.apply(this, args);
   } catch (err) {
     return Promise.reject(err);
@@ -62,8 +65,17 @@ const safeBrowserAccess = (func, args = null) => {
 };
 
 const parseDomain = (url) => {
-  var matches = url.match(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n\?\=]+)/im);
-  return matches && matches[1];
+  var matches = url.match(
+    /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n\?\=]+)/im
+  );
+
+  return !EXCLUDED_DOMAINS.includes(matches[1]) ? matches && matches[1] : "";
 };
 
-export { checkAuth, safeRedirect, getActiveTab, safeBrowserAccess, parseDomain };
+export {
+  checkAuth,
+  safeRedirect,
+  getActiveTab,
+  safeBrowserAccess,
+  parseDomain,
+};
