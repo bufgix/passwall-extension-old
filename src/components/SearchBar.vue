@@ -6,7 +6,7 @@
     >
       <span
         class="uk-form-icon uk-form-icon-flip"
-        :uk-icon="stateVal === '' ? 'icon: search' : 'icon: close'"
+        :uk-icon="stateVal ? 'icon: close' : 'icon: search'"
         @click="stateVal = ''"
         style="pointer-events: all; cursor: pointer;"
       ></span>
