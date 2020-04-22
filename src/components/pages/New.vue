@@ -7,7 +7,12 @@
       </div>
       <div class="uk-margin uk-inline uk-width-expand">
         <span class="uk-form-icon" uk-icon="icon: world"></span>
-        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: location"></span>
+        <span
+          class="uk-form-icon uk-form-icon-flip"
+          :uk-icon="URL ? 'icon: close' : 'icon: location'"
+          style="pointer-events: all; cursor: pointer;"
+          @click="getLocationOrClear"
+        ></span>
         <input v-model="URL" class="uk-input" type="text" placeholder="URL*" />
       </div>
       <div class="uk-grid-small" uk-grid>
@@ -45,8 +50,10 @@
 </template>
 
 <script>
+import { getActiveTab, safeBrowserAccess, parseDomain } from "../../utils";
 export default {
   data: () => ({
+    location: "",
     URL: "",
     username: "",
     password: "",
@@ -54,6 +61,12 @@ export default {
     loading: false,
     error: null
   }),
+  created: function() {
+    safeBrowserAccess(getActiveTab).then(({ url }) => {
+      this.location = parseDomain(url);
+      this.URL = this.location;
+    });
+  },
   methods: {
     createNewLogin: function() {
       if (this.URL === "" || this.username === "") {
@@ -77,6 +90,13 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    getLocationOrClear: function() {
+      if (this.URL) {
+        this.URL = "";
+      } else {
+        this.URL = this.location;
+      }
     }
   }
 };
