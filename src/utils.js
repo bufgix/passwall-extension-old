@@ -46,13 +46,17 @@ const safeRedirect = (routeName) => {
 
 const getActiveTab = () => {
   // use as first parameter of safeBrowserAccess function
-  browser = browser || null;
   return browser.tabs
     .query({ currentWindow: true, active: true })
     .then((tabs) => tabs[0], console.error);
 };
 
-const safeBrowserAccess = (func, args = null) => {
+const sendMessageToPage = (id, data) => {
+  // use as first parameter of safeBrowserAccess function
+  return browser.tabs.sendMessage(id, data);
+};
+
+const safeBrowserAccess = (func, ...args) => {
   // This function for testing in browser and as extension
   // In browser, it will raise exception not error (syntax, undefined, etc...)
   try {
@@ -78,4 +82,5 @@ export {
   getActiveTab,
   safeBrowserAccess,
   parseDomain,
+  sendMessageToPage,
 };
