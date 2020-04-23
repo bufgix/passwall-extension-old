@@ -37,7 +37,7 @@
     <div class="uk-width-1-2 uk-text-right uk-margin-small-top">
       <button
         v-if="showBtn"
-        class="uk-button uk-button-small uk-button-primary"
+        class="uk-button uk-button-small button-passwall"
         @click="newAction"
       >{{ actionText }}</button>
 
@@ -86,5 +86,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.button-passwall {
+  background-color: #ed654b !important;
+  color: #fff;
+}
 </style>

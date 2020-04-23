@@ -30,4 +30,11 @@ body {
   min-width: 400px;
   font-size: 12px;
 }
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="checkbox"]:focus,
+input[type='search']:focus{
+  border-color: #ed654b !important;
+}
 </style>
