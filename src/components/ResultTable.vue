@@ -1,5 +1,5 @@
 <template>
-  <div id="table" class="uk-overflow-auto">
+  <div id="table" class="uk-overflow-auto uk-table-justify" style="max-height: 300px">
     <table class="uk-table uk-table-hover uk-table-divider uk-table-small uk-text-left">
       <thead>
         <tr>
@@ -10,7 +10,18 @@
       </thead>
       <tbody>
         <tr v-for="row in tableData" :key="row.ID">
-          <td class="uk-text-middle">{{row.URL}}</td>
+          <td class="uk-text-middle">
+            <div class="uk-flex-inline uk-text-middle">
+              <img
+                :src="`https://s2.googleusercontent.com/s2/favicons?domain_url=${row.URL}`"
+                :alt="row.URL"
+                height="20"
+                width="20"
+                style="margin-right: 2px; margin-left: 2px"
+              />
+              {{row.URL}}
+            </div>
+          </td>
           <td class="uk-text-middle">{{row.Username}}</td>
           <td class="uk-text-middle">
             <password-field :value="row.Password"></password-field>
