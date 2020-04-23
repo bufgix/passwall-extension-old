@@ -1,6 +1,6 @@
 # passwall-browser-extension
 
-![passwall5](https://user-images.githubusercontent.com/22038798/79932031-24a37480-8455-11ea-82e4-0a90caa857d0.gif)
+![passwall](https://user-images.githubusercontent.com/22038798/80119497-7271c700-8592-11ea-8953-f866c01f7275.gif)
 
 
 ## Project setup
