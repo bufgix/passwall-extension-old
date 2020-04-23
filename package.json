@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && cp ./manifest.json dist/manifest.json && cp ./bgscript.js dist/bgscript.js",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build && cp ./manifest.json dist/manifest.json && cp ./bgscript.js dist/bgscript.js && cp ./content-script.js dist/content-script.js",
+    "lint": "vue-cli-service lint",
+    "copy": "cp ./manifest.json dist/manifest.json && cp ./bgscript.js dist/bgscript.js && cp ./content-script.js dist/content-script.js"
   },
   "dependencies": {
     "axios": "^0.19.2",

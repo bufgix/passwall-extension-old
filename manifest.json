@@ -8,10 +8,15 @@
     "default_icon": "./logo.png"
   },
   "permissions": [
-    "webRequest",
     "<all_urls>",
     "activeTab",
     "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*/**"],
+      "js": ["content-script.js"]
+    }
   ],
   "background": {
     "scripts": [
