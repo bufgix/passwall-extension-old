@@ -6,6 +6,7 @@
         class="uk-width-expand"
         :value="searchText"
         v-on:change="changeSearchText"
+        v-on:clear="refresh()"
       ></SearchBar>
       <div style="margin-top: 6px">
         <a @click="refresh" uk-icon="icon: refresh"></a>

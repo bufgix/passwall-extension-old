@@ -7,7 +7,7 @@
       <span
         class="uk-form-icon uk-form-icon-flip"
         :uk-icon="stateVal ? 'icon: close' : 'icon: search'"
-        @click="stateVal = ''"
+        @click="clearText()"
         style="pointer-events: all; cursor: pointer;"
       ></span>
       <input
@@ -37,6 +37,12 @@ export default {
   watch: {
     value: function(){
       this.stateVal = this.value;
+    }
+  },
+  methods: {
+    clearText: function(){
+      this.stateVal = ''
+      this.$emit("clear");
     }
   }
 };
