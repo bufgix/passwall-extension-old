@@ -10,7 +10,10 @@ function findPassowrdInputForm() {
 
 function getUsernameInputFromForm(form) {
   for (let i = 0; i < form.length; i++) {
-    if (form[i].type === "text" || form[i].type === "email") {
+    if (form[i].type === "email"){ // Fist handle email
+      return form[i];
+    }
+    if (form[i].type === "text") {
       return form[i];
     }
   }
