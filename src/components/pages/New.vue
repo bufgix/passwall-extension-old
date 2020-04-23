@@ -50,7 +50,13 @@
 </template>
 
 <script>
-import { getActiveTab, safeBrowserAccess, parseDomain } from "../../utils";
+/* eslint-disable no-undef */
+import {
+  getActiveTab,
+  safeBrowserAccess,
+  sendMessageToPage,
+  parseDomain
+} from "../../utils";
 export default {
   data: () => ({
     location: "",
@@ -62,9 +68,19 @@ export default {
     error: null
   }),
   created: function() {
-    safeBrowserAccess(getActiveTab).then(({ url }) => {
+    safeBrowserAccess(getActiveTab).then(({ url, id }) => {
       this.location = parseDomain(url);
       this.URL = this.location;
+      safeBrowserAccess(sendMessageToPage, id, { command: "getinputs" }).then(
+        data => {
+          // data will contains username ans password in activetab
+          if (data) {
+            this.generatePassword = false;
+            this.username = data.username;
+            this.password = data.password;
+          }
+        }
+      );
     });
   },
   methods: {
