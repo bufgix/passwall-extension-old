@@ -12,6 +12,28 @@
 
 Check out the [awesome passwall community](https://github.com/pass-wall) and learn how to setup your unique password manager 🎉
 
+### Installation
+Clone the repository
+
+```sh
+$ git clone https://github.com/pass-wall/passwall-extension
+```
+
+Install the project dependencies
+
+```sh
+$ yarn
+```
+
+### Testing as a web app
+You can test as a web app in your browser. To do this start development server
+
+```sh
+$ yarn serve
+```
+
+and visit `http://localhost:8080`
+
 ### Testing on Firefox 🧪
 Firstly, build extension with yarn
 ```sh
