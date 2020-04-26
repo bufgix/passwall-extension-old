@@ -28,6 +28,7 @@ body {
   margin-top: 5px;
   margin-bottom: 5px;
   min-width: 400px;
+  max-width: 450px;
   font-size: 12px;
 }
 
