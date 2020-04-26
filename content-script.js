@@ -1,3 +1,6 @@
+const BROWSER_TYPE = typeof browser === "undefined" ? "chrome" : "firefox";
+var browser = BROWSER_TYPE === "firefox" ? browser : chrome;
+
 function findPassowrdInputForm() {
   const inputs = document.getElementsByTagName("input");
   for (let i = 0; i < inputs.length; i++) {
@@ -10,7 +13,8 @@ function findPassowrdInputForm() {
 
 function getUsernameInputFromForm(form) {
   for (let i = 0; i < form.length; i++) {
-    if (form[i].type === "email"){ // Fist handle email
+    if (form[i].type === "email") {
+      // Fist handle email
       return form[i];
     }
     if (form[i].type === "text") {
@@ -25,8 +29,7 @@ function getInputs() {
     var passwordInput = obj.field;
     var usernameInput = getUsernameInputFromForm(obj.form);
     if (passwordInput && usernameInput) {
-      passwordInput.style.backgroundImage =
-        "url('https://avatars1.githubusercontent.com/u/63540685?s=200&v=4')";
+      passwordInput.style.backgroundImage = `url('${browser.extension.getURL('logo.png')}')`
       passwordInput.style.backgroundPosition = "right";
       passwordInput.style.backgroundSize = "contain";
       passwordInput.style.backgroundRepeat = "no-repeat";

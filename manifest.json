@@ -22,5 +22,6 @@
     "scripts": [
       "./bgscript.js"
     ]
-  }
+  },
+  "web_accessible_resources": ["logo.png"]
 }
