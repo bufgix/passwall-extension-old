@@ -27,8 +27,8 @@ body {
   color: #2c3e50;
   margin-top: 5px;
   margin-bottom: 5px;
-  min-width: 400px;
-  max-width: 450px;
+  min-width: 420px;
+  max-width: 500px;
   font-size: 12px;
 }
 
