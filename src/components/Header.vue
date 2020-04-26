@@ -43,9 +43,9 @@
 
       <button
         v-if="showBtn"
-        class="uk-button uk-button-small uk-button-danger uk-margin-small-left"
+        class="uk-button uk-button-small uk-margin-small-left"
         @click="quit()"
-      >Quit</button>
+      ><span uk-icon="icon: sign-out"></span></button>
     </div>
   </div>
 </template>
@@ -88,7 +88,7 @@ export default {
 
 <style lang="scss">
 .button-passwall {
-  background-color: #ed654b !important;
+  background-color: #1890FF !important;
   color: #fff;
 }
 </style>

@@ -35,6 +35,6 @@ input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="checkbox"]:focus,
 input[type='search']:focus{
-  border-color: #ed654b !important;
+  border-color: #1890FF !important;
 }
 </style>
