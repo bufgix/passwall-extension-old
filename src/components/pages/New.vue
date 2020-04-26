@@ -121,6 +121,6 @@ export default {
 <style lang="scss" scoped>
 .uk-checkbox:checked,
 .uk-checkbox:checked::after {
-  background-color: #ed654b !important;
+  background-color: #1890FF !important;
 }
 </style>
