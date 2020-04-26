@@ -71,16 +71,15 @@ export default {
     safeBrowserAccess(getActiveTab).then(({ url, id }) => {
       this.location = parseDomain(url);
       this.URL = this.location;
-      safeBrowserAccess(sendMessageToPage, id, { command: "getinputs" }).then(
-        data => {
+      safeBrowserAccess(sendMessageToPage, id, { command: "getinputs" })
+        .then(data => {
           // data will contains username ans password in activetab
           if (data) {
             this.generatePassword = false;
             this.username = data.username;
             this.password = data.password;
           }
-        }
-      );
+        })
     });
   },
   methods: {
@@ -120,7 +119,8 @@ export default {
 
 
 <style lang="scss" scoped>
-.uk-checkbox:checked, .uk-checkbox:checked::after{
-  background-color: #ED654B !important;
+.uk-checkbox:checked,
+.uk-checkbox:checked::after {
+  background-color: #ed654b !important;
 }
 </style>
