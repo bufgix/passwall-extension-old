@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const files = ['manifest.json', 'bgscript.js', 'content-script.js'];
+const files = ['manifest.json', 'bgscript.js', 'content-script.js', 'browser-polyfill.js'];
 
 function copyFile(file) {
   return new Promise((resolve, reject) => {

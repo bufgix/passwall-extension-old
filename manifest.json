@@ -4,8 +4,8 @@
   "version": "0.4.0",
   "browser_action": {
     "default_title": "Passwall",
-    "default_popup": "./index.html",
-    "default_icon": "./logo.png"
+    "default_popup": "index.html",
+    "default_icon": "logo.png"
   },
   "permissions": [
     "<all_urls>",
@@ -14,14 +14,22 @@
   ],
   "content_scripts": [
     {
-      "matches": ["*://*/**"],
-      "js": ["content-script.js"]
+      "matches": [
+        "*://*/**"
+      ],
+      "js": [
+        "browser-polyfill.js",
+        "content-script.js"
+      ]
     }
   ],
   "background": {
     "scripts": [
-      "./bgscript.js"
+      "browser-polyfill.js",
+      "bgscript.js"
     ]
   },
-  "web_accessible_resources": ["logo.png"]
+  "web_accessible_resources": [
+    "logo.png"
+  ]
 }

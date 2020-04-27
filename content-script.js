@@ -1,6 +1,3 @@
-const BROWSER_TYPE = typeof browser === "undefined" ? "chrome" : "firefox";
-var browser = BROWSER_TYPE === "firefox" ? browser : chrome;
-
 function findPassowrdInputForm() {
   const inputs = document.getElementsByTagName("input");
   for (let i = 0; i < inputs.length; i++) {

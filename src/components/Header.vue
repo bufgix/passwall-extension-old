@@ -1,27 +1,5 @@
 
 <template>
-  <!--   <div class="uk-flex uk-flex-between uk-flex-middle uk-text-center uk-text-middle">
-    <div class="uk-flex uk-flex-left">
-      <img :src="`${publicPath}logo.png`" alt="logo" height="50" width="50" />
-      <h3>
-        <span>Pass</span>
-        <strong>Wall</strong>
-      </h3>
-    </div>
-    <div>
-      <button
-        v-if="showBtn"
-        class="uk-button uk-button-small uk-button-primary"
-        @click="newAction"
-      >{{ actionText }}</button>
-
-      <button
-        v-if="showBtn"
-        class="uk-button uk-button-small uk-button-danger uk-margin-small-left"
-        @click="quit()"
-      >Quit</button>
-    </div>
-  </div>-->
   <div class="uk-grid-small" uk-grid>
     <div class="uk-width-1-2 uk-flex">
       <div style="margin-top: 5px">
@@ -35,17 +13,14 @@
       </div>
     </div>
     <div class="uk-width-1-2 uk-text-right uk-margin-small-top">
-      <button
-        v-if="showBtn"
-        class="uk-button uk-button-small button-passwall"
-        @click="newAction"
-      >{{ actionText }}</button>
+      <button v-if="showBtn" class="uk-button uk-button-small button-passwall uk-flex-inline uk-flex-middle uk-flex-between" @click="newAction" style="padding: 0 10px">
+        <span :uk-icon="`icon: ${actionIcon}`" style="margin-right: 3px"></span>
+        <div>{{ actionText }}</div>
+      </button>
 
-      <button
-        v-if="showBtn"
-        class="uk-button uk-button-small uk-margin-small-left"
-        @click="quit()"
-      ><span uk-icon="icon: sign-out"></span></button>
+      <button v-if="showBtn" class="uk-button uk-button-small uk-margin-small-left " @click="quit()">
+        <span uk-icon="icon: sign-out"></span>
+      </button>
     </div>
   </div>
 </template>
@@ -61,12 +36,14 @@ export default {
   data() {
     return {
       publicPath: process.env.BASE_URL,
-      actionText: "New"
+      actionText: "New Pass",
+      actionIcon: "plus"
     };
   },
   watch: {
     $route(to, from) {
-      this.actionText = from.path === "/" ? "Back" : "New";
+      this.actionText = from.path === "/" ? "Back" : "New Pass";
+      this.actionIcon = from.path === "/" ? "chevron-right" : "plus"
     }
   },
   methods: {
@@ -88,7 +65,7 @@ export default {
 
 <style lang="scss">
 .button-passwall {
-  background-color: #1890FF !important;
+  background-color: #1890ff !important;
   color: #fff;
 }
 </style>
