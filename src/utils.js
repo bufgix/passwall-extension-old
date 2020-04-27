@@ -2,10 +2,9 @@
 /* eslint-disable no-undef */
 import Vue from "vue";
 import Router from "./router";
+import browser from "webextension-polyfill";
 
-const EXCLUDED_DOMAINS = ["about", "chrome"];  // Exclude the browser specific urls
-
-const BROWSER_TYPE = typeof browser === "undefined" ? "chrome" : "firefox";
+const EXCLUDED_DOMAINS = ["about", "chrome"]; // Exclude the browser specific urls
 
 const checkAuth = () => {
   const exToken = localStorage.getItem("token");
@@ -16,7 +15,7 @@ const checkAuth = () => {
     Vue.prototype.$http
       .post("auth/check")
       .then(() => {
-        Router.PageRouter.push({ path: "/" }).catch(() => {})
+        Router.PageRouter.push({ path: "/" }).catch(() => {});
       })
       .catch(() => {
         // Try Refresh
@@ -25,15 +24,15 @@ const checkAuth = () => {
           .then(({ data }) => {
             localStorage.setItem("token", data.token);
             Vue.prototype.$http.defaults.headers.common.Authorization = `Bearer ${data.token}`;
-            Router.PageRouter.push({ path: "/" }).catch(() => {})
+            Router.PageRouter.push({ path: "/" }).catch(() => {});
           })
           .catch(() => {
             // Go to Login with username and password
-            Router.PageRouter.push({ path: "/login" }).catch(() => {})
+            Router.PageRouter.push({ path: "/login" }).catch(() => {});
           });
       });
   } else {
-    Router.PageRouter.push({ path: "/login" }).catch(() => {})
+    Router.PageRouter.push({ path: "/login" }).catch(() => {});
   }
 };
 
@@ -48,35 +47,14 @@ const safeRedirect = (routeName) => {
 
 const getActiveTab = () => {
   // use as first parameter of safeBrowserAccess function
-  if (BROWSER_TYPE === "firefox") {
-    return browser.tabs
-      .query({ currentWindow: true, active: true })
-      .then((tabs) => tabs[0], console.error);
-  } else {
-    return new Promise((resolve, reject) => {
-      chrome.tabs.query(
-        { currentWindow: true, active: true },
-        (tabs, error) => {
-          if (error) return reject(error);
-          return resolve(tabs[0]);
-        }
-      );
-    });
-  }
+  return browser.tabs
+    .query({ currentWindow: true, active: true })
+    .then((tabs) => tabs[0], console.error);
 };
 
 const sendMessageToPage = (id, data) => {
   // use as first parameter of safeBrowserAccess function
-  if (BROWSER_TYPE === "firefox") {
-    return browser.tabs.sendMessage(id, data);
-  } else {
-    return new Promise((resolve, reject) => {
-      chrome.tabs.sendMessage(id, data, (data, error) => {
-        if (error) return reject(error);
-        return resolve(data);
-      });
-    });
-  }
+  return browser.tabs.sendMessage(id, data);
 };
 
 const safeBrowserAccess = (func, ...args) => {
