@@ -8,7 +8,7 @@
         </div>
 
         <div class="uk-margin-small uk-text-left">
-          <label class="uk-form-label">WallPass Server</label>
+          <label class="uk-form-label">PassWall Server</label>
           <div class="uk-inline uk-width-1-1">
             <span class="uk-form-icon" uk-icon="icon: world"></span>
             <input v-model="baseUrl" class="uk-input" type="text" placeholder="Server URL" />

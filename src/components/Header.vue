@@ -3,7 +3,7 @@
   <div class="uk-grid-small" uk-grid>
     <div class="uk-width-1-2 uk-flex">
       <div style="margin-top: 5px">
-        <img :src="`${publicPath}logo.png`" alt="logo" height="40" width="40" />
+        <img :src="`${publicPath}logo.png`" alt="PassWall" height="40" width="40" />
       </div>
       <div>
         <h4 style="margin-top: 9px">
