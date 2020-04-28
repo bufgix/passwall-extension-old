@@ -13,7 +13,7 @@
           <td class="uk-text-middle">
             <div class="uk-flex-inline uk-text-middle">
               <img
-                :src="`https://s2.googleusercontent.com/s2/favicons?domain_url=${parseDomain(row.URL)}`"
+                :src="`https://s2.googleusercontent.com/s2/favicons?domain_url=${row.URL}`"
                 :alt="row.URL"
                 height="20"
                 width="20"
@@ -34,7 +34,6 @@
 
 <script>
 import PasswordField from "./PasswordField";
-import { parseDomain } from "../utils";
 
 export default {
   components: {
@@ -47,9 +46,6 @@ export default {
     url: function(raw) {
       if (raw.length > 22) return `${[...raw].splice(0, 22).join("")}...`;
       else return raw;
-    },
-    parseDomain: function(url) {
-      return parseDomain(url);
     }
   }
 };
