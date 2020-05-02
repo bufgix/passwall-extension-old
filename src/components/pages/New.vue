@@ -92,7 +92,7 @@ export default {
       }
       this.loading = true;
       this.$http
-        .post("logins/", {
+        .post("api/logins", {
           Username: this.username,
           Password: this.generatePassword ? "" : this.password,
           URL: this.URL

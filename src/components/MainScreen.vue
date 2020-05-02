@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     checkLocalToken: function() {
-      return localStorage.getItem("token") ? true : false;
+      return localStorage.getItem("access_token") ? true : false;
     }
   }
 };
