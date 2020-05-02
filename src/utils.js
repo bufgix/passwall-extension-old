@@ -7,23 +7,25 @@ import browser from "webextension-polyfill";
 const EXCLUDED_DOMAINS = ["about", "chrome"]; // Exclude the browser specific urls
 
 const checkAuth = () => {
-  const exToken = localStorage.getItem("token");
+  const access_token = localStorage.getItem("access_token");
   Vue.prototype.$http.defaults.baseURL =
     localStorage.getItem("baseURL") || "http://localhost:3625/";
-  if (exToken) {
-    Vue.prototype.$http.defaults.headers.common.Authorization = `Bearer ${exToken}`;
+  if (access_token) {
+    Vue.prototype.$http.defaults.headers.common.Authorization = `Bearer ${access_token}`;
     Vue.prototype.$http
       .post("auth/check")
       .then(() => {
         Router.PageRouter.push({ path: "/" }).catch(() => {});
       })
       .catch(() => {
+        const refresh_token = localStorage.getItem("refresh_token");
         // Try Refresh
         Vue.prototype.$http
-          .post("auth/refresh")
+          .post("auth/refresh", {refresh_token})
           .then(({ data }) => {
-            localStorage.setItem("token", data.token);
-            Vue.prototype.$http.defaults.headers.common.Authorization = `Bearer ${data.token}`;
+            localStorage.setItem("access_token", data.access_token);
+            localStorage.setItem("refresh_token", data.refresh_token);
+            Vue.prototype.$http.defaults.headers.common.Authorization = `Bearer ${data.access_token}`;
             Router.PageRouter.push({ path: "/" }).catch(() => {});
           })
           .catch(() => {
@@ -37,7 +39,7 @@ const checkAuth = () => {
 };
 
 const safeRedirect = (routeName) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("access_token");
   if (token) {
     Router.PageRouter.push(routeName);
     return Promise.resolve(true);

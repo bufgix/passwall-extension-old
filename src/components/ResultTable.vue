@@ -13,18 +13,18 @@
           <td class="uk-text-middle">
             <div class="uk-flex-inline uk-text-middle">
               <img
-                :src="`https://s2.googleusercontent.com/s2/favicons?domain_url=${row.URL}`"
-                :alt="row.URL"
+                :src="`https://s2.googleusercontent.com/s2/favicons?domain_url=${row.url}`"
+                :alt="row.url"
                 height="20"
                 width="20"
                 style="margin-right: 2px; margin-left: 2px"
               />
-              {{url(row.URL)}}
+              {{url(row.url)}}
             </div>
           </td>
-          <td class="uk-text-middle">{{row.Username}}</td>
+          <td class="uk-text-middle">{{row.username}}</td>
           <td class="uk-text-middle">
-            <password-field :value="row.Password"></password-field>
+            <password-field :value="row.password"></password-field>
           </td>
         </tr>
       </tbody>

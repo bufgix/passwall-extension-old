@@ -60,7 +60,7 @@ export default {
     refresh: function() {
       this.loading = true;
       this.$http
-        .get("logins/")
+        .get("api/logins")
         .then(res => {
           this.tableData = res.data;
           this.loading = false;
@@ -77,7 +77,7 @@ export default {
     search: function() {
       this.loading = true;
       return this.$http
-        .get("logins/", { params: { Search: this.searchText } })
+        .get("api/logins", { params: { Search: this.searchText } })
         .then(res => {
           this.tableData = res.data;
           this.loading = false;

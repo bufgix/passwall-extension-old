@@ -6,11 +6,15 @@
 
 <script>
 import MainScreen from "./components/MainScreen.vue";
+import { checkAuth } from "./utils";
 
 export default {
   name: "App",
   components: {
     MainScreen
+  },
+  created: function(){
+    checkAuth();
   }
 };
 </script>

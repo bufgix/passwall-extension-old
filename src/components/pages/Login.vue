@@ -60,8 +60,10 @@ export default {
             Password: this.password
           })
           .then(({ data }) => {
-            localStorage.setItem("token", data.token);
-            this.$http.defaults.headers.common.Authorization = `Bearer ${data.token}`;
+            const {access_token, refresh_token} = data;
+            localStorage.setItem("access_token", access_token);
+            localStorage.setItem('refresh_token', refresh_token);
+            this.$http.defaults.headers.common.Authorization = `Bearer ${access_token}`;
             this.$router.push({ path: "/" });
             this.loading = false;
           })
